@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <style>
+            a {text-decoration: none; color: black;}
+        </style>
+    </head>
+
+    <body>
+        <h1>Home</h1>
+        <ul>
+        <% paysInteList.forEach(function(pays, index) { %>
+            <li><a href="/pays/supprimer/<%= index %>">✘</a> <%= pays %></li>
+        <% }); %>
+        </ul>
+        <form action="/pays/ajouter/" method="post">
+            <p>
+                <label for="newPays">Ajout pays</label>
+                <input type="text" name="newPays" id="newPays" autofocus />
+                <input type="submit" />
+            </p>
+        </form>
+    </body>
+</html>
