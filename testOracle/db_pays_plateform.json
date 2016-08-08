@@ -1,0 +1,14 @@
+{
+    "local": {
+        "pays": "fr;be;uk;it;es;de;pt;pl;ru;tr;se;nl;hu"
+    },
+    "inte": {
+        "pays": "fr;be;uk;it;es;de;pt;pl;ru;tr;se;nl;hu"
+    },
+    "ec": {
+        "pays": "fr;be;uk;it;es;de;pt;pl;ru;tr;se;nl;hu"
+    },
+    "pr": {
+        "pays": "fr;be;uk;it;es;de;pt;pl;ru;tr;se;nl;hu"
+    }
+}

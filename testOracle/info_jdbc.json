@@ -1,0 +1,30 @@
+{
+    "ecfr": {
+        "host": "ecfr.db.ntt.preprod.org",
+        "port": 1530,
+        "login": "ecfr",
+        "pwd": "ecfr",
+        "sid": "OXYNET50"
+    },
+    "ecbe": {
+        "host": "ecbe.db.ntt.preprod.org",
+        "port": 1530,
+        "login": "ecbe",
+        "pwd": "ecbe",
+        "sid": "OXYNET50"
+    },
+    "prfr": {
+        "host": "ecfr.db.ntt.preprod.org",
+        "port": 1530,
+        "login": "ecfr",
+        "pwd": "ecfr",
+        "sid": "OXYNET50"
+    },
+    "prbe": {
+        "host": "ecbe.db.ntt.preprod.org",
+        "port": 1530,
+        "login": "ecbe",
+        "pwd": "ecbe",
+        "sid": "OXYNET50"
+    }
+}
