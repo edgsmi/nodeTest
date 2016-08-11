@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
+//var swagger = require('swagger-node-express');
  
 require('./response');
 
@@ -13,7 +14,8 @@ var app = express();
 app.use(bodyParser);
 
 
-
+// Couple the application to the Swagger module. 
+//swagger.setAppHandler(app);
 
 
 if (module.parent === null) {
