@@ -1,0 +1,9 @@
+features : retourne la liste des features
+
+versions : retourne la liste des versions
+paramètre : feature : retour la liste des versions associées à une feature
+
+jira : retourne la liste des jiras pour une feature et version donnée
+paramètre obligatoire : feature : la feature associée
+paramètre obligatoire : version : la version associée
+
