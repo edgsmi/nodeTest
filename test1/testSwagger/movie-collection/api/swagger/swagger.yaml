@@ -36,6 +36,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
+    
       description: add a new movie to the list
       # movie info to be stored
       parameters:

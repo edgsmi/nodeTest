@@ -18,40 +18,288 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
+  /features:
     # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: features
     get:
-      description: Returns 'Hello' to the caller
+      description: Returns the features
       # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      operationId: features
       responses:
         "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/FeatureResponse"
         # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new feature to the list
+      # Feature info to be stored
+      parameters:
+        - name: feature
+          description: feature to add
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Feature"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /versions:
+    # binds a128 app logic to a route
+    x-swagger-router-controller: versions
+    get:
+      description: Returns the versions (if parameter feature is set, return the versions associated to a feature)
+      # used as the method name of the controller
+      operationId: versions
+      produces: 
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+      -
+        name: feature
+        in: query
+        description: the feature
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/VersionResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new version to the list
+      # Version info to be stored
+      parameters:
+        - name: version
+          description: version to add
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Version"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /jiras:
+    # binds a128 app logic to a route
+    x-swagger-router-controller: jiras
+    get:
+      description: Returns the jiras
+      # used as the method name of the controller
+      operationId: jiras
+      produces: 
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+      -
+        name: feature
+        in: query
+        description: the feature
+        required: false
+        type: string
+      -
+        name: version
+        in: query
+        description: the version
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/JiraResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new jira to the list
+      # Jira info to be stored
+      parameters:
+        - name: jira
+          description: jira to add
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Jira"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /properties:
+    # binds a128 app logic to a route
+    x-swagger-router-controller: properties
+    get:
+      description: Returns the properties
+      # used as the method name of the controller
+      operationId: properties
+      produces: 
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+      -
+        name: jira
+        in: query
+        description: the jira associated
+        required: true
+        type: string
+      -
+        name: type
+        in: query
+        description: the type of property
+        required: false
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/PropertyResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                 
+   
   /swagger:
     x-swagger-pipe: swagger_raw
+    
+    
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  FeatureResponse:
     required:
-      - message
+      - features
     properties:
-      message:
+      features:
+        type: array
+        items:
+          type: string
+  Feature:
+    type: object
+    properties:
+      name:
         type: string
+        description: feature name
+      description:
+        type: string
+        description: feature description
+    required:
+      - name
+  VersionResponse:
+    required:
+      - versions
+    properties:
+      versions:
+        type: array
+        items:
+          type: string
+  Version:
+    type: object
+    properties:
+      name:
+        type: string
+        description: version name
+      description:
+        type: string
+        description: version description
+    required:
+      - name
+  JiraResponse:
+    required:
+      - versions
+    properties:
+      versions:
+        type: array
+        items:
+          type: string
+  Jira:
+    type: object
+    properties:
+      name:
+        type: string
+        description: jira name
+      description:
+        type: string
+        description: jira description
+      version:
+        type: string
+        description: version associated to the jira
+      feature:
+        type: string
+        description: feature associated to the jira
+    required:
+      - name
+      - version
+      - feature
+  PropertyResponse:
+    required:
+      - properties
+    properties:
+      properties:
+        type: array
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+            description:
+              type: string
+            type:
+              type: string
+            value:
+              type: string
+            lastUserUpdate:
+              type: string
+            lastDateUpdate:
+              type: string
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment 
+    required:
+      - success
+      - description
   ErrorResponse:
     required:
       - message
